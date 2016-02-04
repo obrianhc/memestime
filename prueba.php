@@ -1,3 +1,3 @@
 <?php
-phpinfo();
+phpinfo(); // Este es un comentario
 ?>
