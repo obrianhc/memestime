@@ -1,9 +1,7 @@
 <html>
 <head>
 <title>Upload</title>
-
 </head>
-
 <body>
 <?php
 	require_once('clases/uploadAction.php')			
@@ -20,10 +18,10 @@
 		?>
 
 		<div id=respuesta>
-			<!-- Aqui colocar mensaje de respuesta, si el archivo se subio con exito, o si hubo algun error-->
+			<!-- Se ha cargado correctamente el archivo -->
+			<!-- Ha ocurrido un error al cargar el archivo -->
 		</div>
 	</form>
-    
 
 </body>
 </html>
