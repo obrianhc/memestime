@@ -8,8 +8,7 @@
 
 <label >Subir meme</label><br>
 
-    <button type="button" id="btnSeleccionar">Elejir archivo</button>
-    
+    <input type="file" id="btnSeleccionar" value="Elegir archivo">
     <input type="text" id="txtNombre"><br>
     <button type="button" id="btnSubir">subir archivo</button>
 
