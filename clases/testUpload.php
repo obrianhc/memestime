@@ -22,22 +22,24 @@ class testUpload{
 		}
 
 		function insert_file($nombreUsuario, $nombreMeme, $url){
+			try{
+				$conexion = new Mongo('192.168.122.188');
+				$baseDatos = $conexion->selectDB('memestime');
+				$coleccion = $baseDatos->selectCollection('imagenes');
+				$registro = array(
+					'usuario' => $nombreUsuario,
+					'nombreImagen' => $nombreMeme,
+					'fecha' => new MongoDate(),
+					'url' => $url
+				);
+				$coleccion->insert($registro);
 
-			$conexion = new Mongo('192.168.122.188');
-			$baseDatos = $conexion->selectDB('memestime');
-			$coleccion = $baseDatos->selectCollection('imagenes');
-			$registro = array(
-				'usuario' => $nombreUsuario,
-				'nombreImagen' => $nombreMeme,
-				'fecha' => new MongoDate(),
-				'url' => $url
-			);
-			$resultado = $coleccion->insert($registro) 
-				or die ('Error insertando registro en mongodb');
-			if($resultado)
-				return true;
-			else
-				return false;
+			}catch(MongoConnectionException $e) {
+				die("No es posible conectarnos a la base de datos:".$e->getMessage());
+			}
+			catch(MongoException $e) {
+				die('No es posible almacenar la informacion: '.$e->getMessage());
+			}
 		}
 	}
 ?>
