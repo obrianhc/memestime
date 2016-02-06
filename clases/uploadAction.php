@@ -1,6 +1,6 @@
 <?php
 	require_once('Global.php');
-	require_once('conexionMongo.php')
+	require_once('conexionMongo.php');
 	class memestimeArchivo{
 		var $respOk = "Se ha cargado correctamente el archivo con exito";
 		var $respError = "Ha ocurrido un error al cargar el archivo";

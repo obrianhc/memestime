@@ -1,8 +1,6 @@
 <?php
 
 class conexionMongo{
-
-
 		function insertarRegistro($idUsuario, $nombreImagen, $url){
 			try{
 				$conexion = new Mongo('localhost');
@@ -56,8 +54,7 @@ class conexionMongo{
 			}
 		}
 		
-		public function eliminarRegistro($idObjeto){
-
+		function eliminarRegistro($idObjeto){
 			try{
 				$conexion = new Mongo('localhost');
 				$baseDatos = $conexion->selectDB('memestime');
@@ -70,9 +67,6 @@ class conexionMongo{
 			catch(MongoException $e) {
 				die('No es posible eliminar la informacion');
 			}
-		}
-
-		
+		}		
 }
-
 ?>
