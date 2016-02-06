@@ -42,16 +42,16 @@ class testConexionMongo extends PHPUnit_Framework_TestCase{
 		$conexionA = new conexionMongo();
 		try{
 			$conexionA = new Mongo('localhost');
-			$baseDatos = $conexionA->selectDB('memestime');
-			$coleccion = $baseDatos->selectCollection('imagenes');
-			$registro = array(
+			$baseDatosA = $conexionA->selectDB('memestime');
+			$coleccionA = $baseDatosA->selectCollection('imagenes');
+			$registroA = array(
 				'_id' => new MongoId("4f626fdf1771a8e71a000000"),
 				'usuario' => "testUserX",
 				'nombreImagen' => "testImageX",
 				'fecha' => new MongoDate(),
 				'url' => "images.memestime.com/abc1234.jpg"
 			);
-			return $coleccionA->insert($registro);
+			return $coleccionA->insert($registroA);
 
 		}catch(MongoConnectionException $e) {
 			die("No es posible conectarnos a la base de datos");
