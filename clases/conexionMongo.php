@@ -1,7 +1,7 @@
 <?php
 
 class conexionMongo{
-		function insertarRegistro($usuari, $nombreImagen, $url){
+		function insertarRegistro($usuario, $nombreImagen, $url){
 			try{
 				$conexion = new Mongo('localhost');
 				$baseDatos = $conexion->selectDB('memestime');
