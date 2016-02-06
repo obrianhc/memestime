@@ -10,9 +10,9 @@
 			$this->directorioTmp = "tmp/";
 			$this->direccionMongo = "172.0.0.1";
 
-			$this->ftpServer = "ftp://192.168.124.189/files";
-			$this->ftpUserName = "anonymous";
-			$this->ftpUserPass = "user@example.com";
+			$this->ftpServer = "192.168.124.189";
+			$this->ftpUserName = "ubuntu";
+			$this->ftpUserPass = "asdf";
 		}
 
 		function getDirectorioTmp(){
