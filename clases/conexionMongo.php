@@ -1,13 +1,13 @@
 <?php
 
 class conexionMongo{
-		function insertarRegistro($idUsuario, $nombreImagen, $url){
+		function insertarRegistro($usuario, $nombreImagen, $url){
 			try{
 				$conexion = new Mongo('localhost');
 				$baseDatos = $conexion->selectDB('memestime');
 				$coleccion = $baseDatos->selectCollection('imagenes');
 				$registro = array(
-					'usuario' => $idUsuario,
+					'usuario' => $usuario,
 					'nombreImagen' => $nombreImagen,
 					'fecha' => new MongoDate(),
 					'url' => $url
@@ -38,12 +38,12 @@ class conexionMongo{
 			}
 		}
 
-		function buscarUsuario($idUsuario, $numeroRegistros){
+		function buscarUsuario($usuario, $numeroRegistros){
 			try{
 				$conexion = new Mongo('localhost');
 				$baseDatos = $conexion->selectDB('memestime');
 				$coleccion = $baseDatos->selectCollection('imagenes');
-				$cursor = $coleccion->find(array("usuario" => $idUsuario))->limit($numeroRegistros)->sort(array("fecha"=> -1));
+				$cursor = $coleccion->find(array("usuario" => $usuario))->limit($numeroRegistros)->sort(array("fecha"=> -1));
 				return $cursor;
 
 			}catch(MongoConnectionException $e) {
