@@ -1,11 +1,11 @@
 <?php
-	
+	require_once("Global.php");
 	class memestimeArchivo{
 		var $respOk = "Se ha cargado correctamente el archivo con exito";
 		var $respError = "Ha ocurrido un error al cargar el archivo";
 		
 		function upload($nombreUsuario, $nombreOriginal, $nombrePublicado, $tipoArchivo, $tamanhoArchivo, $isset, $nombreTemporal, &$strRespuesta){
-			include('Global.php');			
+			//include('Global.php');			
 			$global = new G();
 
 			$rutaArchivo = $directorioTmp . $nombreOriginal;
@@ -58,18 +58,21 @@
 		}
 
 		function sendPorFtp(&$strRespuesta, $rutaArchivoFtp, $rutaArchivoTmp){
-			include('Global.php');			
+			//echo "ftp";
+			//include('Global.php');			
 			$global = new G();
 			$conFtp = ftp_connect($global->getFtpServer());
 			$loginResultado = ftp_login($conFtp, $global->getFtpUserName(), $global->getFtpUserPass());
-			echo "ftp";
+			if(!$conFtp ||!$loginResultado){
+				die("La conexión a servido ftp no funciono!!");
+			}
 			if(ftp_put($conFtp, $rutaArchivoFtp, $rutaArchivoTmp, FTP_BINARY)){
 				$strRespuesta = $this->respOk . ": Archivo subido al repositorio";
 				return true;
 			}else{
-				$strRespuesta = $this->respOk . ": Problemas con el servidor de archivos";
+				$strRespuesta = $this->respError . ": Problemas con el servidor de archivos";
 				return false;
-			}
+			}*/
 			return true;
 		}
 	}
