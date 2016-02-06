@@ -45,7 +45,7 @@ class conexionMongo{
 				$conexion = new Mongo('localhost');
 				$baseDatos = $conexion->selectDB('memestime');
 				$coleccion = $baseDatos->selectCollection('imagenes');
-				$cursor = $coleccion->find(array("usuario" => $nombreImagen))->limit($numeroRegistros)->sort(array("fecha"=> -1));
+				$cursor = $coleccion->find(array("usuario" => $idUsuario))->limit($numeroRegistros)->sort(array("fecha"=> -1));
 				return $cursor;
 
 			}catch(MongoConnectionException $e) {
@@ -56,7 +56,7 @@ class conexionMongo{
 			}
 		}
 		
-		public eliminarRegistro($idObjeto){
+		public function eliminarRegistro($idObjeto){
 			try{
 				$conexion = new Mongo('localhost');
 				$baseDatos = $conexion->selectDB('memestime');
