@@ -1,13 +1,13 @@
 <?php
 
 class conexionMongo{
-		function insertarRegistro($idUsuario, $nombreImagen, $url){
+		function insertarRegistro($idUsuario, $nombreImagen, $url){//cambio de parametro $idUsuario por $id_Usuario
 			try{
 				$conexion = new Mongo('localhost');
 				$baseDatos = $conexion->selectDB('memestime');
 				$coleccion = $baseDatos->selectCollection('imagenes');
 				$registro = array(
-					'usuario' => $idUsuario,
+					'usuario' => $id_Usuario,
 					'nombreImagen' => $nombreImagen,
 					'fecha' => new MongoDate(),
 					'url' => $url
@@ -22,12 +22,12 @@ class conexionMongo{
 			}
 		}
 
-		function buscarRegistro($nombreImagen, $numeroRegistros){
+		function buscarRegistro($nombreImagen, $numeroRegistros){//cambio de parametro $nombreImagen por $nombre_Imagen
 			try{
 				$conexion = new Mongo('localhost');
 				$baseDatos = $conexion->selectDB('memestime');
 				$coleccion = $baseDatos->selectCollection('imagenes');
-				$cursor = $coleccion->find(array("nombreImagen" => $nombreImagen))->limit($numeroRegistros)->sort(array("fecha"=> -1));
+				$cursor = $coleccion->find(array("nombreImagen" => $nombre_Imagen))->limit($numeroRegistros)->sort(array("fecha"=> -1));
 				return $cursor;
 
 			}catch(MongoConnectionException $e) {
@@ -38,12 +38,12 @@ class conexionMongo{
 			}
 		}
 
-		function buscarUsuario($idUsuario, $numeroRegistros){
+		function buscarUsuario($idUsuario, $numeroRegistros){//cambio de parametro $numeroRegistros por $numero_Registros
 			try{
 				$conexion = new Mongo('localhost');
 				$baseDatos = $conexion->selectDB('memestime');
 				$coleccion = $baseDatos->selectCollection('imagenes');
-				$cursor = $coleccion->find(array("usuario" => $idUsuario))->limit($numeroRegistros)->sort(array("fecha"=> -1));
+				$cursor = $coleccion->find(array("usuario" => $idUsuario))->limit($numero_Registros)->sort(array("fecha"=> -1));
 				return $cursor;
 
 			}catch(MongoConnectionException $e) {
@@ -54,12 +54,12 @@ class conexionMongo{
 			}
 		}
 		
-		function eliminarRegistro($idObjeto){
+		function eliminarRegistro($idObjeto){//cambio de parametro $idObjeto por $id_Objeto
 			try{
 				$conexion = new Mongo('localhost');
 				$baseDatos = $conexion->selectDB('memestime');
 				$coleccion = $baseDatos->selectCollection('imagenes');
-				return $coleccion->remove(array("_id"=>$idObjeto));
+				return $coleccion->remove(array("_id"=>$id_Objeto));
 
 			}catch(MongoConnectionException $e) {
 				die("No es posible conectarnos a la base de datos");
