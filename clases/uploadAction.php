@@ -43,7 +43,7 @@
 					$strRespuesta = $strRespuesta . " , :(";
 					return false;				
 				}
-				echo '<img src="ftp://' . $global->getFtpServer() . "/files/" . $nombreMd5 . "." . $tipoArchivo . '">'; 
+				echo '<img src="http://' . $global->getFtpServer() ."/". $nombreMd5 . "." . $tipoArchivo . '">'; 
 				/*La imagen ya esta en el servidor ftp, ahora debemos guardar los cambios*/
 				return true;
 			}else{
