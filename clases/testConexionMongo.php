@@ -39,10 +39,10 @@ class testConexionMongo extends PHPUnit_Framework_TestCase{
 	}
 
 	public function testEliminarRegistroTrue(){
-		$conexion = new conexionMongo();
+		$conexionA = new conexionMongo();
 		try{
-			$conexion = new Mongo('localhost');
-			$baseDatos = $conexion->selectDB('memestime');
+			$conexionA = new Mongo('localhost');
+			$baseDatos = $conexionA->selectDB('memestime');
 			$coleccion = $baseDatos->selectCollection('imagenes');
 			$registro = array(
 				'_id' => new MongoId("4f626fdf1771a8e71a000000"),
@@ -51,7 +51,7 @@ class testConexionMongo extends PHPUnit_Framework_TestCase{
 				'fecha' => new MongoDate(),
 				'url' => "images.memestime.com/abc1234.jpg"
 			);
-			return $coleccion->insert($registro);
+			return $coleccionA->insert($registro);
 
 		}catch(MongoConnectionException $e) {
 			die("No es posible conectarnos a la base de datos");
