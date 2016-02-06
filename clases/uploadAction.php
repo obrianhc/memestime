@@ -1,11 +1,12 @@
 <?php
-	require_once("Global.php");
+	require_once('Global.php');
+	require_once('conexionMongo.php')
 	class memestimeArchivo{
 		var $respOk = "Se ha cargado correctamente el archivo con exito";
 		var $respError = "Ha ocurrido un error al cargar el archivo";
-		
-		function upload($nombreUsuario, $nombreOriginal, $nombrePublicado, $tipoArchivo, $tamanhoArchivo, $isset, $nombreTemporal, &$strRespuesta){
-			//include('Global.php');			
+
+		function upload($nombreUsuario, $nombreOriginal, $nombrePublicado, $tipoArchivo, $tamanhoArchivo, $isset, $nombreTemporal, &$strRespuesta){			
+
 			$global = new G();
 
 			$rutaArchivo = $directorioTmp . $nombreOriginal;
@@ -38,13 +39,15 @@
 
 
 			if (move_uploaded_file($nombreTemporal, $rutaArchivoTmp)) {
-				if($this->sendPorFtp($strRespuesta, $nombreMd5 . "." . $tipoArchivo, $rutaArchivoTmp)){
+				if($this->sendPorFtp($strRespuesta, "files/".$nombreMd5 . "." . $tipoArchivo, $rutaArchivoTmp)){
+					//$conMongo = new ConexionMongo();
+					//$conMongo->insertarRegistro($nombreUsuario, trim($nombrePublicado), $global->getFtpServer() . "/files/" . $nombreMd5 . "." . $tipoArchivo);
 					$strRespuesta = $strRespuesta . " , :)";
 				}else{
 					$strRespuesta = $strRespuesta . " , :(";
 					return false;				
 				}
-				echo '<img src="ftp://' . $global->getFtpServer() . $nombreMd5 . "." . $tipoArchivo . '">'; 
+				echo '<img src="ftp://' . $global->getFtpServer() . "/files/" . $nombreMd5 . "." . $tipoArchivo . '">'; 
 				/*La imagen ya esta en el servidor ftp, ahora debemos guardar los cambios*/
 				return true;
 			}else{
@@ -57,23 +60,23 @@
 			return true;
 		}
 
-		function sendPorFtp(&$strRespuesta, $rutaArchivoFtp, $rutaArchivoTmp){
-			//echo "ftp";
-			//include('Global.php');			
+		function sendPorFtp(&$strRespuesta, $rutaArchivoFtp, $rutaArchivoTmp){		
 			$global = new G();
-			$conFtp = ftp_connect($global->getFtpServer());
-			$loginResultado = ftp_login($conFtp, $global->getFtpUserName(), $global->getFtpUserPass());
-			if(!$conFtp ||!$loginResultado){
+			$conFtp = ftp_connect($global->getFtpServer()) or die ("Error de conexion");
+			$loginResultado = ftp_login($conFtp, $global->getFtpUserName(), $global->getFtpUserPass()) or die ("Error de login");
+
+			if(!$conFtp || !$loginResultado){
 				die("La conexión a servido ftp no funciono!!");
 			}
 			if(ftp_put($conFtp, $rutaArchivoFtp, $rutaArchivoTmp, FTP_BINARY)){
 				$strRespuesta = $this->respOk . ": Archivo subido al repositorio";
+				ftp_close($conFtp);
 				return true;
 			}else{
 				$strRespuesta = $this->respError . ": Problemas con el servidor de archivos";
+				ftp_close($conFtp);
 				return false;
-			}*/
-			return true;
+			}
 		}
 	}
 ?>
