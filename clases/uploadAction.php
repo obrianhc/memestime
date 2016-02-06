@@ -1,6 +1,6 @@
 <?php
 	require_once('Global.php');
-	require_once('conexionMongo.php')
+	require_once('conexionMongo.php');
 	class memestimeArchivo{
 		var $respOk = "Se ha cargado correctamente el archivo con exito";
 		var $respError = "Ha ocurrido un error al cargar el archivo";
@@ -40,8 +40,8 @@
 
 			if (move_uploaded_file($nombreTemporal, $rutaArchivoTmp)) {
 				if($this->sendPorFtp($strRespuesta, "files/".$nombreMd5 . "." . $tipoArchivo, $rutaArchivoTmp)){
-					//$conMongo = new ConexionMongo();
-					//$conMongo->insertarRegistro($nombreUsuario, trim($nombrePublicado), $global->getFtpServer() . "/files/" . $nombreMd5 . "." . $tipoArchivo);
+					$conMongo = new ConexionMongo();
+					$conMongo->insertarRegistro($nombreUsuario, trim($nombrePublicado), $global->getFtpServer() . "/files/" . $nombreMd5 . "." . $tipoArchivo);
 					$strRespuesta = $strRespuesta . " , :)";
 				}else{
 					$strRespuesta = $strRespuesta . " , :(";
