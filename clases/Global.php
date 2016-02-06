@@ -8,11 +8,11 @@
 
 		function __construct(){
 			$this->directorioTmp = "tmp/";
-			$this->direccionMongo = "192.168.122.188";
+			$this->direccionMongo = "172.0.0.1";
 
-			$this->ftpServer = "192.168.124.189";
+			$this->ftpServer = "ftp://192.168.124.189/files";
 			$this->ftpUserName = "anonymous";
-			$this->ftpUserPass = "";
+			$this->ftpUserPass = "user@example.com";
 		}
 
 		function getDirectorioTmp(){

@@ -38,15 +38,15 @@
 
 
 			if (move_uploaded_file($nombreTemporal, $rutaArchivoTmp)) {
-				if(sendPorFtp($strRespuesta, $nombreMd5 . "." . $tipoArchivo, $rutaArchivoTmp)){
+				if($this->sendPorFtp($strRespuesta, $nombreMd5 . "." . $tipoArchivo, $rutaArchivoTmp)){
 					$strRespuesta = $strRespuesta . " , :)";
-					return true;	
 				}else{
 					$strRespuesta = $strRespuesta . " , :(";
 					return false;				
 				}
-				echo '<img src="'. 'ftp://' . $global->getFtpServer() . $nombreMd5 . "." . $tipoArchivo . '">'; 
+				echo '<img src="ftp://' . $global->getFtpServer() . $nombreMd5 . "." . $tipoArchivo . '">'; 
 				/*La imagen ya esta en el servidor ftp, ahora debemos guardar los cambios*/
+				return true;
 			}else{
 				$strRespuesta = $this->respError . ": Inconvenientes en el proceso de subida del archivo no se completo";
 				return false;
@@ -62,7 +62,7 @@
 			$global = new G();
 			$conFtp = ftp_connect($global->getFtpServer());
 			$loginResultado = ftp_login($conFtp, $global->getFtpUserName(), $global->getFtpUserPass());
-			
+			echo "ftp";
 			if(ftp_put($conFtp, $rutaArchivoFtp, $rutaArchivoTmp, FTP_BINARY)){
 				$strRespuesta = $this->respOk . ": Archivo subido al repositorio";
 				return true;
