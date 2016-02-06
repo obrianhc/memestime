@@ -56,7 +56,11 @@ class conexionMongo{
 			}
 		}
 		
+<<<<<<< HEAD
 		public function eliminarRegistro($idObjeto){
+=======
+		function eliminarRegistro($idObjeto){
+>>>>>>> 2f3a061d6f7cb78f2c5545205a670c3aad06542c
 			try{
 				$conexion = new Mongo('localhost');
 				$baseDatos = $conexion->selectDB('memestime');
