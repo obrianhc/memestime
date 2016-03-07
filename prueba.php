@@ -1,3 +1,4 @@
 <?php
-phpinfo(); // Este es un comentario, y lo modifico
+// Este es un comentario, y lo modifico
+phpinfo();
 ?>
