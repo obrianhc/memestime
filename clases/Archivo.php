@@ -16,7 +16,7 @@ class Archivo{
 		}
 		catch(MongoException $e) {
 			die('No es posible obtener la informacion');
-			return NULL;
+			return NULL
 		}
 	}
 	public function getArchivo($id){
