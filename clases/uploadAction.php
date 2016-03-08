@@ -41,7 +41,7 @@
 			if (move_uploaded_file($nombreTemporal, $rutaArchivoTmp)) {
 				if($this->sendPorFtp($strRespuesta, "files/".$nombreMd5 . "." . $tipoArchivo, $rutaArchivoTmp)){
 					$conMongo = new ConexionMongo();
-					$conMongo->insertarRegistro($nombreUsuario, trim($nombrePublicado), $global->getFtpServer() . "/files/" . $nombreMd5 . "." . $tipoArchivo);
+					$conMongo->insertarRegistro($nombreUsuario, trim($nombrePublicado), $global->getFtpServer() .'/'. $nombreMd5 . "." . $tipoArchivo);
 					$strRespuesta = $strRespuesta . " , :)";
 				}else{
 					$strRespuesta = $strRespuesta . " , :(";
