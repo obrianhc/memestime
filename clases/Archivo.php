@@ -2,7 +2,7 @@
 require_once('Global.php');
 class Archivo{
 	public function getArchivos($numeroFicheros){
-		if($numeroFicheros==0) return null;
+		if($numeroFicheros==0) return NULL;
 		$global = new G();
 		try{
 			$conexion = new Mongo($global->getDireccionMongo());
@@ -12,15 +12,15 @@ class Archivo{
 			return $cursor;
 		} catch(MongoConnectionException $e) {
 			die("No es posible conectarnos a la base de datos");
-			return null;
+			return NULL;
 		}
 		catch(MongoException $e) {
 			die('No es posible obtener la informacion');
-			return null;
+			return NULL;
 		}
 	}
 	public function getArchivo($id){
-		if($id==0) return null;
+		if($id==0) return NULL;
 		$global = new G();
 		try{
 			$conexion = new Mongo($global->getDireccionMongo());
@@ -30,11 +30,11 @@ class Archivo{
 			return $cursor;
 		} catch(MongoConnectionException $e) {
 			die("No es posible conectarnos a la base de datos");
-			return null;
+			return NULL;
 		}
 		catch(MongoException $e) {
 			die('No es posible obtener la informacion');
-			return null;
+			return NULL;
 		}
 	}
 }
