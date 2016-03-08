@@ -1,0 +1,3 @@
+cd FuncionalSearch
+bin/behat 
+
