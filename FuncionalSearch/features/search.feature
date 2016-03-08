@@ -8,3 +8,4 @@ Scenario: Searching for "celular"
 	When I fill in "txtBuscar" with "celular"
 	And I press "btnBuscar"
 	Then I should see "celulares de hoy en dia 0"
+	
