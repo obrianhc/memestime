@@ -7,7 +7,7 @@
 	require_once('clases/uploadAction.php'); // quitando....
 	$strRepuesta = "";	
 ?>
-<label >Subir meme</label><br>
+<label >Subir memes</label><br>
 	<form action = "upload.php" method = "post" enctype="multipart/form-data">
 		<input type="file" name = "btnSeleccionar" id="btnSeleccionar" value="Elegir archivo"><br>
 		<label >Nombre: </label><input type="text" id="txtNombre" name = "txtNombre"><br>
