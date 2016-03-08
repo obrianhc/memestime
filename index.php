@@ -9,6 +9,7 @@
 	</head>
 
 	<body>
+		<a href="upload.php">Subir contenido</a>
 		<ul>
 			<?php
 				$archivos = new Archivo();
