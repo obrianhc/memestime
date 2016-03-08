@@ -4,7 +4,7 @@
 </head>
 <body>
 <?php
-	require_once('clases/uploadAction.php'); // Agregando un comentario
+	require_once('clases/uploadAction.php'); // quitando....
 	$strRepuesta = "";	
 ?>
 <label >Subir meme</label><br>
