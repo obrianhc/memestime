@@ -36,13 +36,14 @@
 				$strRespuesta = $this->respError . ": Formato " . $formatioArchivo . " invalido";
 				return false;
 			}	
-			
+			/*
 			$conMongo = new ConexionMongo();
 			$conMongo->insertarRegistro($nombreUsuario, trim($nombrePublicado), $global->getFtpServer() . "/files/" . $nombreMd5 . "." . $tipoArchivo);
 			$strRespuesta = $this->respOk . ", :)" . $nombreUsuario;
 			return true;
+			*/
 			
-			/*
+			
 			if (move_uploaded_file($nombreTemporal, $rutaArchivoTmp)) {
 				if($this->sendPorFtp($strRespuesta, "files/".$nombreMd5 . "." . $tipoArchivo, $rutaArchivoTmp)){
 					$conMongo = new ConexionMongo();
@@ -58,7 +59,7 @@
 			}else{
 				$strRespuesta = $this->respError . ": Inconvenientes en el proceso de subida del archivo no se completo";
 				return false;
-			}*/
+			}
 			
 
 			$strRespuesta = $this->respOk . " " . $rutaArchivoTmp;
