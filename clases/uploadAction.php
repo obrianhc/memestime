@@ -2,8 +2,8 @@
 	require_once('Global.php');
 	require_once('conexionMongo.php');
 	class memestimeArchivo{
-		var $respOk = "Se ha cargado correctamente el archivo con exito";
-		var $respError = "Ha ocurrido un error al cargar el archivo";
+		var $respOk = "Se ha cargado correctamente el archivo con exito. ";
+		var $respError = "Ha ocurrido un error al cargar el archivo. ";
 
 		function upload($nombreUsuario, $nombreOriginal, $nombrePublicado, $tipoArchivo, $tamanhoArchivo, $isset, $nombreTemporal, &$strRespuesta){			
 
@@ -36,24 +36,29 @@
 				$strRespuesta = $this->respError . ": Formato " . $formatioArchivo . " invalido";
 				return false;
 			}	
-
-
+			
+			$conMongo = new ConexionMongo();
+			$conMongo->insertarRegistro($nombreUsuario, trim($nombrePublicado), $global->getFtpServer() . "/files/" . $nombreMd5 . "." . $tipoArchivo);
+			$strRespuesta = $this->respOk . ", :)" . $nombreUsuario;
+			return true;
+			
+			/*
 			if (move_uploaded_file($nombreTemporal, $rutaArchivoTmp)) {
 				if($this->sendPorFtp($strRespuesta, "files/".$nombreMd5 . "." . $tipoArchivo, $rutaArchivoTmp)){
 					$conMongo = new ConexionMongo();
 					$conMongo->insertarRegistro($nombreUsuario, trim($nombrePublicado), $global->getFtpServer() . "/files/" . $nombreMd5 . "." . $tipoArchivo);
-					$strRespuesta = $strRespuesta . " , :)";
+					$strRespuesta = $this->respOk . ", :)";
 				}else{
-					$strRespuesta = $strRespuesta . " , :(";
+					$strRespuesta = $this->respError . ", :(";
 					return false;				
 				}
 				echo '<img src="http://' . $global->getFtpServer() ."/". $nombreMd5 . "." . $tipoArchivo . '">'; 
-				/*La imagen ya esta en el servidor ftp, ahora debemos guardar los cambios*/
+				//La imagen ya esta en el servidor ftp, ahora debemos guardar los cambios
 				return true;
 			}else{
 				$strRespuesta = $this->respError . ": Inconvenientes en el proceso de subida del archivo no se completo";
 				return false;
-			}
+			}*/
 			
 
 			$strRespuesta = $this->respOk . " " . $rutaArchivoTmp;
