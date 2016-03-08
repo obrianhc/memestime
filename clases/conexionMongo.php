@@ -59,7 +59,7 @@ class conexionMongo{
 				$conexion = new Mongo('localhost');
 				$baseDatos = $conexion->selectDB('memestime');
 				$coleccion = $baseDatos->selectCollection('imagenes');
-				return $coleccion->remove(array("_id"=>$id_Objeto));
+				return $coleccion->remove(array("_id"=>$idObjeto));
 
 			}catch(MongoConnectionException $e) {
 				die("No es posible conectarnos a la base de datos");
