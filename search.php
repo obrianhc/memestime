@@ -12,7 +12,8 @@
 ?>
 	<label>Buscar memes</label><br>
 	<form action = "search.php" method = "post" enctype="multipart/form-data">
-	<label >&iquest;Que necesitas?</label><input type="text" id="txtBuscar" name = "txtBuscar"><br>
+	<label >&iquest;Que necesitas?</label><input placeholder="Search …" id="txtBuscar" name="search_block" value="" size="15" maxlength="128" type="text">
+	<br>
 	<button type="submit" id="btnBuscar" name = "btnBuscar">Buscar meme</button></br>
 	<?php
 		if(isset($_POST['btnBuscar'])){
