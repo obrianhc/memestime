@@ -27,7 +27,7 @@
 
 		<div id=respuesta>
 			<?php
-				echo $strRepuesta
+				<label >$strRepuesta</label>
 			?>
 			<!-- Se ha cargado correctamente el archivo -->
 			<!-- Ha ocurrido un error al cargar el archivo -->
