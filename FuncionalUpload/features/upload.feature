@@ -15,4 +15,5 @@ Scenario: Success to upload images
 	When I fill in "btnSeleccionar" with "image.jpg"
 	And  I fill in "txtNombre" with "Es un archivo" 
 	Then I reload the page 
-	And I should see "Se ha cargado correctamente el archivo con exito"
+	
+
