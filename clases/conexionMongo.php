@@ -1,11 +1,12 @@
 <?php
-
+require_once('Global.php');
 class conexionMongo{
 		function insertarRegistro($idUsuario, $nombreImagen, $url){//cambio de parametro $idUsuario por $id_Usuario
 			try{
-				$conexion = new Mongo('localhost');
-				$baseDatos = $conexion->selectDB('memestime');
-				$coleccion = $baseDatos->selectCollection('imagenes');
+				$g = new Global();
+				$conexion = new Mongo($g->getDireccionMongo());
+				$baseDatos = $conexion->selectDB($g->getDB());
+				$coleccion = $baseDatos->selectCollection($g->getColeccion());
 				$listadoNombreImagen = preg_split("/[\s]+/", trim($nombreImagen), NULL, PREG_SPLIT_NO_EMPTY);
 				
 				$registro = array(
@@ -26,9 +27,10 @@ class conexionMongo{
 
 		function buscarRegistro($nombreImagen, $numSeccion){//cambio de parametro $nombreImagen por $nombre_Imagen
 			try{
-				$conexion = new Mongo('localhost');
-				$baseDatos = $conexion->selectDB('memestime');
-				$coleccion = $baseDatos->selectCollection('imagenes');
+				$g = new Global();
+				$conexion = new Mongo($g->getDireccionMongo());
+				$baseDatos = $conexion->selectDB($g->getDB());
+				$coleccion = $baseDatos->selectCollection($g->getColeccion());
 				$listadoNombreImagen = preg_split("/[\s]+/", trim($nombreImagen), NULL, PREG_SPLIT_NO_EMPTY);
 				if(empty($listadoNombreImagen)){
 					$cursor = $coleccion->find()->limit(3)->skip(($numSeccion-1)*3);
@@ -52,9 +54,10 @@ class conexionMongo{
 
 		function getConteoColeccionImagenesTotal($nombreImagen){
 			try{
-				$conexion = new Mongo('localhost');
-				$baseDatos = $conexion->selectDB('memestime');
-				$coleccion = $baseDatos->selectCollection('imagenes');
+				$g = new Global();
+				$conexion = new Mongo($g->getDireccionMongo());
+				$baseDatos = $conexion->selectDB($g->getDB());
+				$coleccion = $baseDatos->selectCollection($g->getColeccion());
 				$listadoNombreImagen = preg_split("/[\s]+/", trim($nombreImagen), NULL, PREG_SPLIT_NO_EMPTY);
 				if(empty($listadoNombreImagen)){
 					$cursor = $coleccion->count();
@@ -82,9 +85,10 @@ class conexionMongo{
 
 		function buscarUsuario($idUsuario, $numeroRegistros){//cambio de parametro $numeroRegistros por $numero_Registros
 			try{
-				$conexion = new Mongo('localhost');
-				$baseDatos = $conexion->selectDB('memestime');
-				$coleccion = $baseDatos->selectCollection('imagenes');
+				$g = new Global();
+				$conexion = new Mongo($g->getDireccionMongo());
+				$baseDatos = $conexion->selectDB($g->getDB());
+				$coleccion = $baseDatos->selectCollection($g->getColeccion());
 				$cursor = $coleccion->find(array("usuario" => $idUsuario))->limit($numeroRegistros)->sort(array("fecha"=> -1));
 				return $cursor;
 
@@ -98,9 +102,10 @@ class conexionMongo{
 		
 		function eliminarRegistro($idObjeto){//cambio de parametro $idObjeto por $id_Objeto
 			try{
-				$conexion = new Mongo('localhost');
-				$baseDatos = $conexion->selectDB('memestime');
-				$coleccion = $baseDatos->selectCollection('imagenes');
+				$g = new Global();
+				$conexion = new Mongo($g->getDireccionMongo());
+				$baseDatos = $conexion->selectDB($g->getDB());
+				$coleccion = $baseDatos->selectCollection($g->getColeccion());
 				return $coleccion->remove(array("_id"=>$idObjeto));
 
 			}catch(MongoConnectionException $e) {

@@ -43,7 +43,7 @@
 			return true;
 			*/
 			
-			
+			echo "files/".$nombreMd5 . "." . $tipoArchivo.'  '.$rutaArchivoTmp;
 			if (move_uploaded_file($nombreTemporal, $rutaArchivoTmp)) {
 				if($this->sendPorFtp($strRespuesta, "files/".$nombreMd5 . "." . $tipoArchivo, $rutaArchivoTmp)){
 					$conMongo = new ConexionMongo();

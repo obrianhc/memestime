@@ -13,7 +13,7 @@
 			$this->DB = "memestime";
 			$this->coleccion = "imagenes";
 
-			$this->ftpServer = "192.168.124.199";
+			$this->ftpServer = "192.168.1.54";
 			$this->ftpUserName = "ubuntu";
 			$this->ftpUserPass = "asdf";
 		}
