@@ -42,17 +42,17 @@
 			return true;
 			*/
 			
-			echo "files/".$nombreMd5 . "." . $tipoArchivo.'  '.$rutaArchivoTmp;
+			echo $nombreMd5 . "." . $tipoArchivo.'  '.$rutaArchivoTmp;
 			if (move_uploaded_file($nombreTemporal, $rutaArchivoTmp)) {
-				if($this->sendPorFtp($strRespuesta, "files/".$nombreMd5 . "." . $tipoArchivo, $rutaArchivoTmp)){
+				if($this->sendPorFtp($strRespuesta, "/files/" . $nombreMd5 . "." . $tipoArchivo, $rutaArchivoTmp)){
 					$conMongo = new ConexionMongo();
-					$conMongo->insertarRegistro($nombreUsuario, trim($nombrePublicado), $global->getFtpServer() .'/files/'. $nombreMd5 . "." . $tipoArchivo);
+					$conMongo->insertarRegistro($nombreUsuario, trim($nombrePublicado), $nombreMd5 . "." . $tipoArchivo);
 					$strRespuesta = $strRespuesta . " , :)";
 				}else{
 					$strRespuesta = $this->respError . ", :(";
 					return false;				
 				}
-				echo '<img src="ftp://' . $global->getFtpServer() ."/files/". $nombreMd5 . "." . $tipoArchivo . '">'; 
+				echo '<img src="http://' . $global->getFtpServer() ."/". $nombreMd5 . "." . $tipoArchivo . '">'; 
 				//La imagen ya esta en el servidor ftp, ahora debemos guardar los cambios
 				return true;
 			}else{
@@ -75,6 +75,7 @@
 				die("La conexión a servido ftp no funciono!!");
 			}
 			if(ftp_put($conFtp, $rutaArchivoFtp, $rutaArchivoTmp, FTP_BINARY)){
+				ftp_chmod($conFtp, 0775, $rutaArchivoFtp);
 				$strRespuesta = $this->respOk . ": Archivo subido al repositorio";
 				ftp_close($conFtp);
 				return true;

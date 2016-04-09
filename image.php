@@ -1,6 +1,8 @@
 <html>
 <?php
 	require_once('clases/Archivo.php');
+	require_once('clases/Global.php');
+	$global = new G();
 	$archivo = new Archivo();
 	$cursor = $archivo->getArchivo($_GET['image']);
 	$dato = array();
@@ -14,13 +16,13 @@
 		<meta property="og:type"          content="Repositorio de memes" />
 		<meta property="og:title"         content="Memestime" />
 		<meta property="og:description"   content="<?php echo implode(' ', $dato['nombreImagen']); ?>" />
-		<meta property="og:image"         content="ftp://<?php echo $dato['url']; ?>" />
+		<meta property="og:image"         content="http://<?php echo $global->getFtpServer().'/'.$dato['url']; ?>" />
 
 	</head>
 
 	<body>
 	<?php
-		echo '<img src="ftp://'.$dato['url'].'" id="imagen" width="30%">';
+		echo '<img src="http://'.$global->getFtpServer().'/'.$dato['url'].'" id="imagen" width="30%">';
 	?>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
