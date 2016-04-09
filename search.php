@@ -10,6 +10,7 @@
 	$numIndices = 0;
 	$numResultados = 0;
 ?>
+	<a href="index.php">Regresar</a>
 	<label>Buscar memes</label><br>
 	<form action = "search.php" method = "post" enctype="multipart/form-data">
 	<label >&iquest;Que necesitas?</label><input name="txtBuscar" size="15" maxlength="128" type="text">

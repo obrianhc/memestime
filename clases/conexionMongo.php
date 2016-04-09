@@ -1,9 +1,10 @@
 <?php
-require_once('Global.php');
+
 class conexionMongo{
 		function insertarRegistro($idUsuario, $nombreImagen, $url){//cambio de parametro $idUsuario por $id_Usuario
 			try{
-				$g = new Global();
+				require_once('Global.php');
+				$g = new G();
 				$conexion = new Mongo($g->getDireccionMongo());
 				$baseDatos = $conexion->selectDB($g->getDB());
 				$coleccion = $baseDatos->selectCollection($g->getColeccion());
@@ -27,7 +28,8 @@ class conexionMongo{
 
 		function buscarRegistro($nombreImagen, $numSeccion){//cambio de parametro $nombreImagen por $nombre_Imagen
 			try{
-				$g = new Global();
+				require_once('Global.php');
+				$g = new G();
 				$conexion = new Mongo($g->getDireccionMongo());
 				$baseDatos = $conexion->selectDB($g->getDB());
 				$coleccion = $baseDatos->selectCollection($g->getColeccion());
@@ -38,7 +40,7 @@ class conexionMongo{
 				}
 				$listadoNombreImagenRegex = array();
 				foreach($listadoNombreImagen as $elemento){
-					$listadoNombreImagenRegex[] = new MongoRegex("/^". $elemento ."/");
+					$listadoNombreImagenRegex[] = new MongoRegex("/^". $elemento ."/i");
 				}
 				$criterioBusqueda = array("nombreImagen"=>array('$in' => $listadoNombreImagenRegex));
 				$cursor = $coleccion->find($criterioBusqueda)->limit(3)->skip(($numSeccion-1)*3);
@@ -54,7 +56,8 @@ class conexionMongo{
 
 		function getConteoColeccionImagenesTotal($nombreImagen){
 			try{
-				$g = new Global();
+				require_once('Global.php');
+				$g = new G();
 				$conexion = new Mongo($g->getDireccionMongo());
 				$baseDatos = $conexion->selectDB($g->getDB());
 				$coleccion = $baseDatos->selectCollection($g->getColeccion());
@@ -85,7 +88,8 @@ class conexionMongo{
 
 		function buscarUsuario($idUsuario, $numeroRegistros){//cambio de parametro $numeroRegistros por $numero_Registros
 			try{
-				$g = new Global();
+				require_once('Global.php');
+				$g = new G();
 				$conexion = new Mongo($g->getDireccionMongo());
 				$baseDatos = $conexion->selectDB($g->getDB());
 				$coleccion = $baseDatos->selectCollection($g->getColeccion());
@@ -102,7 +106,8 @@ class conexionMongo{
 		
 		function eliminarRegistro($idObjeto){//cambio de parametro $idObjeto por $id_Objeto
 			try{
-				$g = new Global();
+				require_once('Global.php');
+				$g = new G();
 				$conexion = new Mongo($g->getDireccionMongo());
 				$baseDatos = $conexion->selectDB($g->getDB());
 				$coleccion = $baseDatos->selectCollection($g->getColeccion());
