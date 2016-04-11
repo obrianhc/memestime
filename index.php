@@ -1,16 +1,8 @@
-<html>
 <?php
+	include('header.php');
 	require_once('clases/Archivo.php');
+	head('Memestime','Inicio');
 ?>
-	<head>
-		<title>
-			Memestime
-		</title>
-	</head>
-
-	<body>
-		<a href="upload.php">Subir contenido</a><br>
-		<a href="search.php">Buscar</a>
 		<ul>
 			<?php
 				$archivos = new Archivo();
@@ -20,5 +12,6 @@
 				}
 			?>
 		</ul>
-	</body>
-</html>
+<?php
+	foot();
+?>
