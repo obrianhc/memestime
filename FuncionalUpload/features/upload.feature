@@ -8,7 +8,7 @@ Scenario: Fail to Upload images
 	When I upload the image "ghibli.jpg" 
 	And  I press "btnSubir"
 	Then I reload the page 
-	And I should see "Ha ocurrido un error al cargar el archivo: Debes de colocar un nombre para tu publicacion"
+	And I should see "Ha ocurrido un error al cargar el archivo. : Debes de colocar un nombre para tu publicacion"
 
 Scenario: Success to upload images
 	Given I go to "/upload.php"
