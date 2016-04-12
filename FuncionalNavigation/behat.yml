@@ -1,6 +1,6 @@
 default:
     extensions:
         Behat\MinkExtension:
-            base_url: http://192.168.1.25/memestime
+            base_url: http://192.168.43.28/memestime
             goutte: ~
             selenium2: ~
