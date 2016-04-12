@@ -5,7 +5,7 @@ Feature: Memestime upload
 
 Scenario: Success to upload images
 	Given I go to "/upload.php"
-	When I upload the image "/FuncionalUpload/ghibli.jpg" 
+	When I upload the image "http://192.168.1.25/memestime/FuncionalUpload/ghibli.jpg" 
 	And  I fill in "txtNombre" with "Es un archivo" 
 	Then I reload the page 
 	And I should see "Se ha cargado correctamente el archivo con exito. : Archivo subido al repositorio , :)"
