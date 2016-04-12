@@ -4,7 +4,7 @@
 </head>
 <body>
 <?php
-	require_once('clases/uploadAction.php');
+	require_once('clases/uploadAction.php'); // quitando....
 	$strRepuesta = "";	
 ?>
 <label >Subir meme</label><br>
@@ -26,9 +26,9 @@
 		?>
 
 		<div id=respuesta>
-			<label><?php
+			<?php
 				echo $strRepuesta
-			?></label>
+			?>
 			<!-- Se ha cargado correctamente el archivo -->
 			<!-- Ha ocurrido un error al cargar el archivo -->
 		</div>

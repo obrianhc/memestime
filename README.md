@@ -1,6 +1,8 @@
 # memestime
 Proyecto del grupo 3 en Análisis y Diseño 2 USAC
 Probando la rama develop
+<<<<<<< HEAD
+=======
 
 Otra prueba
 
@@ -11,3 +13,4 @@ hola mundo desde luis
 hello you!
 Modificación con fines de enseñanza.
 Modificación desde github.
+>>>>>>> search

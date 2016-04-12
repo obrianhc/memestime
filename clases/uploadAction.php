@@ -1,12 +1,11 @@
 <?php
-	require_once('Global.php');
 	require_once('conexionMongo.php');
 	class memestimeArchivo{
-		var $respOk = "Se ha cargado correctamente el archivo con exito";
-		var $respError = "Ha ocurrido un error al cargar el archivo";
+		var $respOk = "Se ha cargado correctamente el archivo con exito. ";
+		var $respError = "Ha ocurrido un error al cargar el archivo. ";
 
 		function upload($nombreUsuario, $nombreOriginal, $nombrePublicado, $tipoArchivo, $tamanhoArchivo, $isset, $nombreTemporal, &$strRespuesta){			
-
+			require_once('Global.php');
 			$global = new G();
 
 			$rutaArchivo = $directorioTmp . $nombreOriginal;
@@ -36,19 +35,25 @@
 				$strRespuesta = $this->respError . ": Formato " . $formatioArchivo . " invalido";
 				return false;
 			}	
-
-
+			/*
+			$conMongo = new ConexionMongo();
+			$conMongo->insertarRegistro($nombreUsuario, trim($nombrePublicado), $global->getFtpServer() . "/files/" . $nombreMd5 . "." . $tipoArchivo);
+			$strRespuesta = $this->respOk . ", :)" . $nombreUsuario;
+			return true;
+			*/
+			
+			echo $nombreMd5 . "." . $tipoArchivo.'  '.$rutaArchivoTmp;
 			if (move_uploaded_file($nombreTemporal, $rutaArchivoTmp)) {
-				if($this->sendPorFtp($strRespuesta, "files/".$nombreMd5 . "." . $tipoArchivo, $rutaArchivoTmp)){
+				if($this->sendPorFtp($strRespuesta, "/files/" . $nombreMd5 . "." . $tipoArchivo, $rutaArchivoTmp)){
 					$conMongo = new ConexionMongo();
-					$conMongo->insertarRegistro($nombreUsuario, trim($nombrePublicado), $global->getFtpServer() . "/files/" . $nombreMd5 . "." . $tipoArchivo);
+					$conMongo->insertarRegistro($nombreUsuario, trim($nombrePublicado), $nombreMd5 . "." . $tipoArchivo);
 					$strRespuesta = $strRespuesta . " , :)";
 				}else{
-					$strRespuesta = $strRespuesta . " , :(";
+					$strRespuesta = $this->respError . ", :(";
 					return false;				
 				}
 				echo '<img src="http://' . $global->getFtpServer() ."/". $nombreMd5 . "." . $tipoArchivo . '">'; 
-				/*La imagen ya esta en el servidor ftp, ahora debemos guardar los cambios*/
+				//La imagen ya esta en el servidor ftp, ahora debemos guardar los cambios
 				return true;
 			}else{
 				$strRespuesta = $this->respError . ": Inconvenientes en el proceso de subida del archivo no se completo";
@@ -60,7 +65,8 @@
 			return true;
 		}
 
-		function sendPorFtp(&$strRespuesta, $rutaArchivoFtp, $rutaArchivoTmp){		
+		function sendPorFtp(&$strRespuesta, $rutaArchivoFtp, $rutaArchivoTmp){
+			require_once('Global.php');	
 			$global = new G();
 			$conFtp = ftp_connect($global->getFtpServer()) or die ("Error de conexion");
 			$loginResultado = ftp_login($conFtp, $global->getFtpUserName(), $global->getFtpUserPass()) or die ("Error de login");
@@ -69,6 +75,7 @@
 				die("La conexión a servido ftp no funciono!!");
 			}
 			if(ftp_put($conFtp, $rutaArchivoFtp, $rutaArchivoTmp, FTP_BINARY)){
+				ftp_chmod($conFtp, 0775, $rutaArchivoFtp);
 				$strRespuesta = $this->respOk . ": Archivo subido al repositorio";
 				ftp_close($conFtp);
 				return true;

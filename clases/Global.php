@@ -5,16 +5,24 @@
 		private $ftpServer;
 		private $ftpUserName;
 		private $ftpUserPass;
-
+		private $DB;
+		private $coleccion;
 		function __construct(){
 			$this->directorioTmp = "tmp/";
-			$this->direccionMongo = "172.0.0.1";
+			$this->direccionMongo = "127.0.0.1";
+			$this->DB = "memestime";
+			$this->coleccion = "imagenes";
 
-			$this->ftpServer = "192.168.124.189";
+			$this->ftpServer = "192.168.1.55";
 			$this->ftpUserName = "ubuntu";
 			$this->ftpUserPass = "asdf";
 		}
-
+		function getDB(){
+			return $this->DB;
+		}
+		function getColeccion(){
+			return $this->coleccion;
+		}
 		function getDirectorioTmp(){
 			return $this->directorioTmp;
 		}
