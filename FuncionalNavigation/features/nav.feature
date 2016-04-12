@@ -6,6 +6,6 @@ Feature: Memestime Navigation
 
 Scenario: Navigation
 	Given I am on "/index.php"
-	Then  I should see "users"
-    And I follow "inanzzz"
-    Then I should see "Behat"
+	Then  I should see "Subir Archivo"
+	And I follow "Todos a bordo del tren de la rikura"
+        Then I should see "Salir"
