@@ -3,6 +3,7 @@
 	require_once('clases/Archivo.php');
 	head('Memestime','Inicio');
 ?>
+		<h2 id="TituloIndex">Memestime</h2>
 		<ul>
 			<?php
 				$archivos = new Archivo();
