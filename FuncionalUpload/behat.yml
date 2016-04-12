@@ -3,6 +3,7 @@ default:
         Behat\MinkExtension:
              base_url: http://192.168.124.84/memestime
              #base_url: http://localhost/memestime
+             files_path: 'http://192.168.124.84/memestime/FuncionalUpload/'
              goutte: ~
              selenium2: ~
             

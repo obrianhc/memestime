@@ -20,5 +20,29 @@ class FeatureContext extends MinkContext
      */
     public function __construct()
     {
-   }
+    }
+
+/**
+   * @Then /^I upload the image "([^"]*)"$/
+   */
+  public function iUploadTheImage($path) {
+    // Cannot use the build in MinkExtension function 
+    // because the id of the file input field constantly changes and the input field is hidden
+    if ($this->getMinkParameter('files_path')) {
+      $fullPath = rtrim(realpath($this->getMinkParameter('files_path')), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$path;
+      
+      if (is_file($fullPath)) {
+        $fileInput = 'input[type="file"]';
+        $field = $this->getSession()->getPage()->find('jpg', $fileInput);
+
+        if (null === $field) {
+           throw new Exception("File input is not found");
+        }
+        $field->attachFile($fullPath);
+      }
+    }
+    else throw new Exception("File is not found at the given location");      
+  }
+
+
 }
