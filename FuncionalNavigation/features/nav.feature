@@ -6,6 +6,6 @@ Feature: Memestime Navigation
 
 Scenario: Navigation
 	Given I am on "/index.php"
-	Then  I should see "Subir Archivo"
+	Then  I should see "Memestime"
 	And I follow "Todos a bordo del tren de la rikura"
-        Then I should see "Salir"
+        Then I should see "Todos a bordo del tren de la rikura"
