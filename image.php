@@ -5,11 +5,19 @@
 	$global = new G();
 	$archivo = new Archivo();
 	$eliminar = new eliminarContenido();
-	$strRespuesta ="";
+	$strRespuesta = "";
 	$cursor = $archivo->getArchivo($_GET['image']);
 	$dato = array();
 	foreach($cursor as $fila){
 		$dato = $fila;
+	}
+	if(isset($_POST['btnEliminar'])){
+		if($eliminar->eliminarArchivo($_GET['image'], 'files/'.$dato['url'], $strRespuesta)){
+			echo $strRespuesta;
+			header('location: index.php');
+		}else{
+			echo $strRespuesta;
+		}
 	}
 	include('header.php');
 	head('Memestime', implode(' ', $dato['nombreImagen']));
@@ -25,18 +33,12 @@
 
 	<?php
 	echo '<img src="http://'.$global->getFtpServer().'/'.$dato['url'].'" id="imagen" width="30%">';
-
-	if(strcmp($dato['usuario'], $_COOKIE['nombre']) == 0){
-		echo "<td><button type='submit' id='btnEliminar' name='btnEliminar'>Eliminar meme</button></td> \n";
-	}
-	if(isset($_POST['btnEliminar'])){
-	
-		if(eliminar->eliminarArchivo($_GET['image'], $dato['url'], $strRespuesta)){
-			echo $strRespuesta;
-			header('Location: index.php');
-		}
-		
-	
+	if($dato['usuario']==$_COOKIE['nombre']){
+		?>
+		<form name="formEliminar" action="http://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" method="post">
+			<input type='submit' name='btnEliminar' value="Eliminar Meme">
+		</form>
+		<?php
 	}
 
 	?>

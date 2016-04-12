@@ -111,7 +111,7 @@ class conexionMongo{
 				$conexion = new Mongo($g->getDireccionMongo());
 				$baseDatos = $conexion->selectDB($g->getDB());
 				$coleccion = $baseDatos->selectCollection($g->getColeccion());
-				return $coleccion->remove(array("_id"=>$idObjeto));
+				return $coleccion->remove(array("_id"=>new MongoId("$idObjeto")));
 
 			}catch(MongoConnectionException $e) {
 				die("No es posible conectarnos a la base de datos");
