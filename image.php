@@ -1,8 +1,11 @@
 <?php
 	require_once('clases/Archivo.php');
 	require_once('clases/Global.php');
+	require_once('clases/eliminarContenido.php');
 	$global = new G();
 	$archivo = new Archivo();
+	$eliminar = new eliminarContenido();
+	$strRespuesta ="";
 	$cursor = $archivo->getArchivo($_GET['image']);
 	$dato = array();
 	foreach($cursor as $fila){
@@ -22,6 +25,20 @@
 
 	<?php
 	echo '<img src="http://'.$global->getFtpServer().'/'.$dato['url'].'" id="imagen" width="30%">';
+
+	if(strcmp($dato['usuario'], $_COOKIE['nombre']) == 0){
+		echo "<td><button type='submit' id='btnEliminar' name='btnEliminar'>Eliminar meme</button></td> \n";
+	}
+	if(isset($_POST['btnEliminar'])){
+	
+		if(eliminar->eliminarArchivo($_GET['image'], $dato['url'], $strRespuesta)){
+			echo $strRespuesta;
+			header('Location: index.php');
+		}
+		
+	
+	}
+
 	?>
 	<div id="fb-root"></div>
 	<!-- Your share button code -->
