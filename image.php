@@ -30,7 +30,11 @@
 		<meta property="og:image"         content="http://<?php echo $global->getFtpServer().'/'.$dato['url']; ?>" />
 
 	</head>
-
+	<h1 id="TituloMeme">
+	<?php
+	echo implode(' ', $dato['nombreImagen']);
+	?>
+	</h1>
 	<?php
 	echo '<img src="http://'.$global->getFtpServer().'/'.$dato['url'].'" id="imagen" width="30%">';
 	if($dato['usuario']==$_COOKIE['nombre']){
