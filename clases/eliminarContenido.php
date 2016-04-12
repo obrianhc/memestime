@@ -1,4 +1,5 @@
 <?php
+
 class eliminarContenido{
 	private $respOk;
 	private $respError;

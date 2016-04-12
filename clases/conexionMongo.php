@@ -1,5 +1,5 @@
 <?php
-
+ 
 class conexionMongo{
 		function insertarRegistro($idUsuario, $nombreImagen, $url){//cambio de parametro $idUsuario por $id_Usuario
 			try{

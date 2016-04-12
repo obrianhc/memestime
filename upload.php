@@ -1,5 +1,5 @@
 <?php
-	require_once('clases/uploadAction.php'); // quitando....
+ 	require_once('clases/uploadAction.php'); // quitando....
 	$strRepuesta = "";
 	include('header.php');
 	head('Memestime', 'Subir Archivos');	
