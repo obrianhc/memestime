@@ -1,0 +1,3 @@
+cd FuncionalNavigation
+bin/behat 
+
