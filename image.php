@@ -30,26 +30,43 @@
 		<meta property="og:image"         content="http://<?php echo $global->getFtpServer().'/'.$dato['url']; ?>" />
 
 	</head>
-	<h1 id="TituloMeme">
-	<?php
-	echo implode(' ', $dato['nombreImagen']);
-	?>
-	</h1>
-	<?php
-	echo '<img src="http://'.$global->getFtpServer().'/'.$dato['url'].'" id="imagen" width="30%">';
-	if($dato['usuario']==$_COOKIE['nombre']){
-		?>
-		<form name="formEliminar" action="http://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" method="post">
-			<input type='submit' name='btnEliminar' value="Eliminar Meme">
-		</form>
-		<?php
-	}
-	?>
-	<div id="fb-root"></div>
-	<!-- Your share button code -->
-	<div class="fb-share-button" 
-		data-href="http://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" 
-		data-layout="button_count"></div>
+
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-lg-10 col-md-5 col-sm-5">
+						<h3>
+							<?php
+							echo implode(' ', $dato['nombreImagen']);
+							?>
+						</h3>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<div id="fb-root"></div>
+						<!-- Your share button code -->
+						<div class="fb-share-button" 
+							data-href="http://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" 
+							data-layout="button_count"></div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				
+				<?php
+				echo '<img class="img-responsive" src="http://'.$global->getFtpServer().'/'.$dato['url'].'" id="imagen">';
+				if($dato['usuario']==$_COOKIE['nombre']){
+					?>
+					<form name="formEliminar" action="http://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" method="post">
+						<input type='submit' name='btnEliminar' value="Eliminar Meme">
+					</form>
+					<?php
+				}
+				?>
+				
+			</div>
+		</div>
+	</div>
 <?php
 	foot();
 ?>

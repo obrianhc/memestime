@@ -15,16 +15,25 @@
 			$rutaArchivoTmp = $global->getDirectorioTmp() . $nombreMd5 . $datetime;
 
 			if($nombrePublicado == ""){
-				$strRespuesta = $this->respError . ": Debes de colocar un nombre para tu publicacion";
+				$strRespuesta = '<div class="alert alert-danger">'
+							.$this->respError 
+							.": Debes de colocar un nombre para tu publicacion"
+							.'</div>';
 				return false;
 			}
 
 			if($tamanhoArchivo > 10000000){
-				$strRespuesta = $this->respError . ": La imagen no debe de pesar más de 10Mbytes";
+				$strRespuesta = '<div class="alert alert-danger">'
+							.$this->respError
+							.": La imagen no debe de pesar más de 10MB"
+							.'</div>';
 			}
 
 			if($isset){
-				$strRespuesta = $this->respError . ": Debe de subir algo";
+				$strRespuesta = '<div class="alert alert-danger">'
+							.$this->respError 
+							.": Debe seleccionar subir algo"
+							.'</div>';
 				return false;
 			}
 			
@@ -32,36 +41,44 @@
 			{
 				$rutaArchivoTmp = $rutaArchivoTmp . "." . $tipoArchivo;			
 			}else{
-				$strRespuesta = $this->respError . ": Formato " . $formatioArchivo . " invalido";
+				$strRespuesta = '<div class="alert alert-danger">'
+							.$this->respError
+							.": Formato "
+							.$formatioArchivo
+							." invalido"
+							.'</div>';
 				return false;
 			}	
-			/*
-			$conMongo = new ConexionMongo();
-			$conMongo->insertarRegistro($nombreUsuario, trim($nombrePublicado), $global->getFtpServer() . "/files/" . $nombreMd5 . "." . $tipoArchivo);
-			$strRespuesta = $this->respOk . ", :)" . $nombreUsuario;
-			return true;
-			*/
-			
-			echo $nombreMd5 . "." . $tipoArchivo.'  '.$rutaArchivoTmp;
 			if (move_uploaded_file($nombreTemporal, $rutaArchivoTmp)) {
 				if($this->sendPorFtp($strRespuesta, "/files/" . $nombreMd5 . "." . $tipoArchivo, $rutaArchivoTmp)){
 					$conMongo = new ConexionMongo();
 					$conMongo->insertarRegistro($nombreUsuario, trim($nombrePublicado), $nombreMd5 . "." . $tipoArchivo);
-					$strRespuesta = $strRespuesta . " , :)";
+					$strRespuesta = '<div class="alert alert-success">'
+								.$strRespuesta
+								.'</div>';
 				}else{
-					$strRespuesta = $this->respError . ", :(";
+					$strRespuesta = '<div class="alert alert-danger">'
+								.$this->respError
+								.'</div>';
 					return false;				
 				}
-				echo '<img src="http://' . $global->getFtpServer() ."/". $nombreMd5 . "." . $tipoArchivo . '">'; 
+				echo '<img class="img-responsive" src="http://' . $global->getFtpServer() ."/". $nombreMd5 . "." . $tipoArchivo . '">'; 
 				//La imagen ya esta en el servidor ftp, ahora debemos guardar los cambios
 				return true;
 			}else{
-				$strRespuesta = $this->respError . ": Inconvenientes en el proceso de subida del archivo no se completo";
+				$strRespuesta = '<div class="alert alert-danger">'
+							.$this->respError
+							.": Inconvenientes en el proceso de subida del archivo no se completo"
+							.'</div>';
 				return false;
 			}
 			
 
-			$strRespuesta = $this->respOk . " " . $rutaArchivoTmp;
+			$strRespuesta = '<div class="alert alert-info">'
+						.$this->respOk
+						." " 
+						.$rutaArchivoTmp
+						.'</div>';
 			return true;
 		}
 
@@ -76,11 +93,13 @@
 			}
 			if(ftp_put($conFtp, $rutaArchivoFtp, $rutaArchivoTmp, FTP_BINARY)){
 				ftp_chmod($conFtp, 0775, $rutaArchivoFtp);
-				$strRespuesta = $this->respOk . ": Archivo subido al repositorio";
+				$strRespuesta = $this->respOk
+							.": Archivo subido al repositorio";
 				ftp_close($conFtp);
 				return true;
 			}else{
-				$strRespuesta = $this->respError . ": Problemas con el servidor de archivos";
+				$strRespuesta = $this->respError
+							.": Problemas con el servidor de archivos";
 				ftp_close($conFtp);
 				return false;
 			}
