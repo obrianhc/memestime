@@ -44,7 +44,6 @@
 		</form>
 		<?php
 	}
-
 	?>
 	<div id="fb-root"></div>
 	<!-- Your share button code -->
