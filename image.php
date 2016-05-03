@@ -58,7 +58,7 @@
 				if($dato['usuario']==$_COOKIE['nombre']){
 					?>
 					<form name="formEliminar" action="http://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" method="post">
-						<input type='submit' name='btnEliminar' value="Eliminar Meme">
+						<input class="btn btn-danger" type='submit' name='btnEliminar' value="Eliminar Meme">
 					</form>
 					<?php
 				}

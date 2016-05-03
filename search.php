@@ -11,8 +11,8 @@
 	<div class="panel-heading">
 		<h3>Buscar Memes</h3>
 	</div>
+	<form action = "search.php" method = "post" enctype="multipart/form-data">
 	<div class="panel-body">
-		<form action = "search.php" method = "post" enctype="multipart/form-data">
 			<div class="form-group">
 				<label>&iquest;Que necesitas?</label>
 				<input name="txtBuscar" class="form-control" size="15" maxlength="128" type="text">
@@ -82,6 +82,7 @@
 			?>
 
 	</div>
+	</form>
 </div>
 <?php
 foot();		
