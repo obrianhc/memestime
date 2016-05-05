@@ -8,4 +8,4 @@ Scenario: Navigation
 	Given I am on "/index.php"
 	Then  I should see "mi creacion"
 	And I follow "Ver"
-        Then I should see "mi creacion"
+        Then I should see "yo naci en la rikura"
