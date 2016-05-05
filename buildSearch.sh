@@ -1,7 +1,7 @@
 
 
 
-cd FuncionalSearch
+cd FuncionalSearch/FuncionalSearch
 bin/behat 
 
 
