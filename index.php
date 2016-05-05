@@ -5,6 +5,7 @@
 	head('Memestime','Inicio');
 	$global = new G();
 ?>
+<h1>Servidor 1</h1>
 <div class="row">
 <?php
 	$archivos = new Archivo();

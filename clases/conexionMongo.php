@@ -5,7 +5,7 @@ class conexionMongo{
 			try{
 				require_once('Global.php');
 				$g = new G();
-				$conexion = new Mongo($g->getDireccionMongo());
+				$conexion = new MongoClient($g->getDireccionMongo());
 				$baseDatos = $conexion->selectDB($g->getDB());
 				$coleccion = $baseDatos->selectCollection($g->getColeccion());
 				$listadoNombreImagen = preg_split("/[\s]+/", trim($nombreImagen), NULL, PREG_SPLIT_NO_EMPTY);
@@ -30,7 +30,7 @@ class conexionMongo{
 			try{
 				require_once('Global.php');
 				$g = new G();
-				$conexion = new Mongo($g->getDireccionMongo());
+				$conexion = new MongoClient($g->getDireccionMongo());
 				$baseDatos = $conexion->selectDB($g->getDB());
 				$coleccion = $baseDatos->selectCollection($g->getColeccion());
 				$listadoNombreImagen = preg_split("/[\s]+/", trim($nombreImagen), NULL, PREG_SPLIT_NO_EMPTY);
@@ -58,7 +58,7 @@ class conexionMongo{
 			try{
 				require_once('Global.php');
 				$g = new G();
-				$conexion = new Mongo($g->getDireccionMongo());
+				$conexion = new MongoClient($g->getDireccionMongo());
 				$baseDatos = $conexion->selectDB($g->getDB());
 				$coleccion = $baseDatos->selectCollection($g->getColeccion());
 				$listadoNombreImagen = preg_split("/[\s]+/", trim($nombreImagen), NULL, PREG_SPLIT_NO_EMPTY);
@@ -90,7 +90,7 @@ class conexionMongo{
 			try{
 				require_once('Global.php');
 				$g = new G();
-				$conexion = new Mongo($g->getDireccionMongo());
+				$conexion = new MongoClient($g->getDireccionMongo());
 				$baseDatos = $conexion->selectDB($g->getDB());
 				$coleccion = $baseDatos->selectCollection($g->getColeccion());
 				$cursor = $coleccion->find(array("usuario" => $idUsuario))->limit($numeroRegistros)->sort(array("fecha"=> -1));
@@ -108,7 +108,7 @@ class conexionMongo{
 			try{
 				require_once('Global.php');
 				$g = new G();
-				$conexion = new Mongo($g->getDireccionMongo());
+				$conexion = new MongoClient($g->getDireccionMongo());
 				$baseDatos = $conexion->selectDB($g->getDB());
 				$coleccion = $baseDatos->selectCollection($g->getColeccion());
 				return $coleccion->remove(array("_id"=>new MongoId("$idObjeto")));

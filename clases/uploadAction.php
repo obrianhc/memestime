@@ -85,7 +85,7 @@
 		function sendPorFtp(&$strRespuesta, $rutaArchivoFtp, $rutaArchivoTmp){
 			require_once('Global.php');	
 			$global = new G();
-			$conFtp = ftp_connect($global->getFtpServer()) or die ("Error de conexion");
+			$conFtp = ftp_connect($global->getFtpServer()) or die ("Error de conexion servidor de archivos");
 			$loginResultado = ftp_login($conFtp, $global->getFtpUserName(), $global->getFtpUserPass()) or die ("Error de login");
 
 			if(!$conFtp || !$loginResultado){
