@@ -5,7 +5,9 @@ Feature: Memestime searching
 
 Scenario: Searching for "celular"
 	Given I go to "/search.php"
-	When I fill in "txtBuscar" with "celular"
+	When I fill in "txtBuscar" with "t"
 	And I press "btnBuscar"
-	Then I should see "celulares de hoy en dia 0"
+	Then I should see search results containing "t"
+	
+	
 	
