@@ -7,5 +7,5 @@ Feature: Memestime Navigation
 Scenario: Navigation
 	Given I am on "/index.php"
 	Then  I should see "matadero vegano "
-	And I follow "/image.php?image=572b93db6803fac8038b456f"
+	And I follow "http://192.168.43.145/image.php?image=572b93db6803fac8038b456f"
         Then I should see "matadero vegano "
