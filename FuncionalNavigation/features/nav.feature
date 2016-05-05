@@ -6,6 +6,6 @@ Feature: Memestime Navigation
 
 Scenario: Navigation
 	Given I am on "/index.php"
-	Then  I should see "Memestime"
-	And I follow "Todos a bordo del tren de la rikura"
-        Then I should see "Todos a bordo del tren de la rikura"
+	Then  I should see "matadero vegano "
+	And I follow "/image.php?image=572b93db6803fac8038b456f"
+        Then I should see "matadero vegano "
